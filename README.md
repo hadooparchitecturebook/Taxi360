@@ -114,6 +114,12 @@ From the impala-shell or Hue Impala Query Editor:
 
     select * from ny_taxi_trip
 
+**HBase:**
+
+In the HBase shell, run the following command:
+
+    scan 'taxi-trip', {'LIMIT' => 5}
+    
 **HBase REST Server:**
 
 On the gateway node, start the REST server in a terminal:

@@ -34,7 +34,7 @@ Log into the gateway node and create the Kafka topic used for the example. Note 
 
     kafka-topics --zookeeper ZKHOST:ZKPORT --partition 2 --replication-factor 2 --create --topic taxi-trip-input
 
-Where ZKHOST:ZKPORT is the host and port number for a ZooKeeper server
+Where ZKHOST:ZKPORT is the host and port number for a ZooKeeper server in the cluster.
 
 You can test the successful creation of the topic with the following:
 

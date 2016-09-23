@@ -75,6 +75,7 @@ Kafka:
     java -cp Taxi360.jar com.hadooparchitecturebook.taxi360.common.CsvKafkaPublisher <brokerList> <topicName> <dataFolderOrFile> <sleepPerRecord> <acks> <linger.ms> <producer.type> <batch.size> <salts>
 
 For example:
+
     java -cp Taxi360.jar com.hadooparchitecturebook.taxi360.common.CsvKafkaPublisher KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input yellow_tripdata_2009-01.10000.csv 10 0 10 async 1000 100
 
 Run Spark to Solr:

@@ -78,7 +78,7 @@ For example:
 
     java -cp Taxi360.jar com.hadooparchitecturebook.taxi360.common.CsvKafkaPublisher KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input yellow_tripdata_2009-01.10000.csv 10 0 10 async 1000 100
 
-Run Spark to Solr:
+**Run Spark to Solr:**
 
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.solr.SparkStreamingTaxiTripToSolR --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <KafkaBrokerList> <kafkaTopicList> <checkpointDir> <numberOfSeconds> <runLocal> <solrCollection> <zkHost:zkPort>
 
@@ -86,7 +86,7 @@ For example:
 
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.solr.SparkStreamingTaxiTripToSolR --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input tmp/checkpoint 1 c taxi-trip-collection 2181/solr
 
-Run Spark to Kudu:
+**Run Spark to Kudu:**
 
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.kudu.SparkStreamingTaxiTripToKudu --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <KafkaBrokerList> <kafkaTopicList> <numberOfSeconds> <runLocal> <kuduMaster> <taxiEntityTableName> <kuduAppEventTable <checkPointFolder>
 
@@ -94,7 +94,11 @@ For example:
 
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.kudu.SparkStreamingTaxiTripToKudu --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input 1 c KUDU_MASTER ny_taxi_entity ny_taxi_trip tmp/checkpoint
 
-Run Spark to HBase:
+**Run Spark to HBase:**
+
+    spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.hbase.SparkStreamingTaxiTripToHBase --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <KafkaBrokerList> <kafkaTopicList> <numberOfSeconds> <runLocal> <hbaseTable> <numOfSalts> <checkpointDir> <hbaseConfigFolder>
+
+    spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.hbase.SparkStreamingTaxiTripToHBase --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input 1 c taxi-trip 6 /tmp/checkpoint /opt/cloudera/parcels/CDH/lib/hbase/conf/
 
 
 Testing

@@ -65,8 +65,6 @@ Create the HBase table:
 
 Log into the gateway node and execute the following step:
 
-TODO: move package:
-
 hadoop jar Taxi360.jar com.hadooparchitecturebook.taxi360.setup.hbase.CreateSaltedTable taxi-trip f 6 6 /opt/cloudera/parcels/CDH/lib/hbase/conf/
 
 Executing

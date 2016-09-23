@@ -1,0 +1,1 @@
+UPDATE ny_taxi_entity SET total_dispute_trips=101 where vender_id = 'venderID:1234';

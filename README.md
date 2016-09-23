@@ -58,7 +58,7 @@ Execute the following DDL scripts to create the required Kudu objects. These can
 * kudu/taxi360/create_ny_taxi_trip_table.impala.sql
 * kudu/taxi360/create_ny_taxi_entity_table.impala.sql
 
-Make sure to replace "<ReplaceMeWithKuduMasterHost>" with the hostname for the Kudu master in each script.
+Make sure to replace "\<ReplaceMeWithKuduMasterHost\>" with the hostname for the Kudu master in each script.
 
 Create the HBase table:
 -----------------------

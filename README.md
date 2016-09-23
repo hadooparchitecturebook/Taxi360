@@ -104,17 +104,17 @@ For example:
 Testing
 -------
 
-Solr:
+**Solr:**
 
 Log into the Hue Search dashboard.
 
-Kudu:
+**Kudu:**
 
 From the impala-shell or Hue Impala Query Editor:
 
     select * from ny_taxi_trip
 
-HBase REST Server:
+**HBase REST Server:**
 
 On the gateway node, start the REST server in a terminal:
 

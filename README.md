@@ -70,7 +70,7 @@ hadoop jar Taxi360.jar com.hadooparchitecturebook.taxi360.setup.hbase.CreateSalt
 Executing
 ---------
 
-*Kafka:*
+**Kafka:**
 
     java -cp Taxi360.jar com.hadooparchitecturebook.taxi360.common.CsvKafkaPublisher <brokerList> <topicName> <dataFolderOrFile> <sleepPerRecord> <acks> <linger.ms> <producer.type> <batch.size> <salts>
 

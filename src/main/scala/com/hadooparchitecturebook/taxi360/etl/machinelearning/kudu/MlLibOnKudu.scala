@@ -12,8 +12,9 @@ object MlLibOnKudu {
   def main(args: Array[String]): Unit = {
 
     if (args.length == 0) {
-      println("Args: <runLocal> <kuduMaster> " +
-        "<accountMartTableName> " +
+      println("Args: <runLocal> " +
+        "<kuduMaster> " +
+        "<taxiTable> " +
         "<numOfCenters> " +
         "<numOfIterations> ")
       return
@@ -21,7 +22,7 @@ object MlLibOnKudu {
 
     val runLocal = args(0).equalsIgnoreCase("l")
     val kuduMaster = args(1)
-    val accountMartTableName = args(2)
+    val taxiTable = args(2)
     val numOfCenters = args(3).toInt
     val numOfIterations = args(4).toInt
 
@@ -39,14 +40,14 @@ object MlLibOnKudu {
     val sqlContext = new SQLContext(sc)
 
     val kuduOptions = Map(
-      "kudu.table" -> accountMartTableName,
+      "kudu.table" -> taxiTable,
       "kudu.master" -> kuduMaster)
 
-    sqlContext.read.options(kuduOptions).format("org.kududb.spark.kudu").load.
-      registerTempTable("account_mart")
+    sqlContext.read.options(kuduOptions).format("org.apache.kudu.spark.kudu").load.
+      registerTempTable("ny_taxi_trip_tmp")
 
     //Vector
-    val vectorRDD:RDD[Vector] = sqlContext.sql("select * from account_mart").map(r => {
+    val vectorRDD:RDD[Vector] = sqlContext.sql("select * from ny_taxi_trip_tmp").map(r => {
       val taxiTrip = NyTaxiYellowTripBuilder.build(r)
       generateVectorOnly(taxiTrip)
     })

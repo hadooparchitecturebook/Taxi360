@@ -39,8 +39,8 @@ object SparkStreamingTaxiTripToKudu {
         "<numberOfSeconds>" +
         "<runLocal>" +
         "<kuduMaster>" +
-        "<taxiEntityTableName>",
-        "<kuduAppEventTable",
+        "<kdudTaxiTripEntityTableName>",
+        "<kuduTaxiTripTable",
         "<checkPointFolder>")
       return
     }
@@ -50,8 +50,8 @@ object SparkStreamingTaxiTripToKudu {
     val numberOfSeconds = args(2).toInt
     val runLocal = args(3).equals("l")
     val kuduMaster = args(4)
-    val taxiEntityTableName = args(5)
-    val taxiTripTableName = args(6)
+    val kdudTaxiTripEntityTableName = args(5)
+    val kuduTaxiTripTable = args(6)
     val checkPointFolder = args(7)
 
     println("kafkaBrokerList:" + kafkaBrokerList)
@@ -59,8 +59,8 @@ object SparkStreamingTaxiTripToKudu {
     println("numberOfSeconds:" + numberOfSeconds)
     println("runLocal:" + runLocal)
     println("kuduMaster:" + kuduMaster)
-    println("taxiEntityTableName:" + taxiEntityTableName)
-    println("taxiTripTableName:" + taxiTripTableName)
+    println("taxiEntityTableName:" + kdudTaxiTripEntityTableName)
+    println("taxiTripTableName:" + kuduTaxiTripTable)
     println("checkPointFolder:" + checkPointFolder)
 
     val sc: SparkContext = if (runLocal) {
@@ -91,7 +91,7 @@ object SparkStreamingTaxiTripToKudu {
 
     tripDStream.foreachRDD(rdd => {
       rdd.foreachPartition(it => {
-        sendTripToKudu(taxiTripTableName, it, StaticKuduClient.getKuduClient(kuduMasterBc.value))
+        sendTripToKudu(kuduTaxiTripTable, it, StaticKuduClient.getKuduClient(kuduMasterBc.value))
       })
     })
 
@@ -116,7 +116,7 @@ object SparkStreamingTaxiTripToKudu {
         Option(new NyTaxiYellowEntityStateWrapper(newState, newTaxiEntity))
       }).foreachRDD(rdd => {
       rdd.foreachPartition(it => {
-        sendEntityToKudu(taxiEntityTableName, it, StaticKuduClient.getKuduClient(kuduMasterBc.value))
+        sendEntityToKudu(kdudTaxiTripEntityTableName, it, StaticKuduClient.getKuduClient(kuduMasterBc.value))
       })
     })
 

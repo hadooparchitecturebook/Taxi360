@@ -9,11 +9,10 @@ object KuduToNestedHDFS {
   def main(args: Array[String]): Unit = {
 
     if (args.length == 0) {
-      println("Args: <runLocal> <kuduMaster> " +
+      println("Args: <runLocal> " +
+        "<kuduMaster> " +
         "<kuduTaxiTripTableName> " +
-        "<hdfsTaxiNestedTableName> " +
-        "<numOfCenters> " +
-        "<numOfIterations> ")
+        "<hdfsTaxiNestedTableName> ")
       return
     }
 
@@ -39,10 +38,10 @@ object KuduToNestedHDFS {
       "kudu.table" -> kuduTaxiTripTableName,
       "kudu.master" -> kuduMaster)
 
-    hiveContext.read.options(kuduOptions).format("org.kududb.spark.kudu").load.
-      registerTempTable("kuduTaxiTripTableName")
+    hiveContext.read.options(kuduOptions).format("org.apache.kudu.spark.kudu").load.
+      registerTempTable("ny_taxi_trip_tmp")
 
-    val kuduDataDf = hiveContext.sql("select * from kuduTaxiTripTableName")
+    val kuduDataDf = hiveContext.sql("select * from ny_taxi_trip_tmp")
 
     val newNestedDf = kuduDataDf.map(r => {
       val pojo = NyTaxiYellowTripBuilder.build(r)
@@ -63,7 +62,8 @@ object KuduToNestedHDFS {
       "   payment_type: STRING, " +
       "   total_amount: DOUBLE, " +
       "   fare_amount: DOUBLE " +
-      " )")
+      "  >>" +
+      " ) stored as parquet")
 
     val emptyDf = hiveContext.sql("select * from " + hdfsTaxiNestedTableName + " limit 0")
 

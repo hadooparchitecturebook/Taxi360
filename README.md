@@ -100,6 +100,12 @@ For example:
 
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.hbase.SparkStreamingTaxiTripToHBase --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input 1 c taxi-trip 6 /tmp/checkpoint /opt/cloudera/parcels/CDH/lib/hbase/conf/
 
+**Run Spark SQL and MlLib Example**
+
+    spark-submit --class com.hadooparchitecturebook.taxi360.etl.machinelearning.kudu.MlLibOnKudu --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <runLocal> <kuduMaster> <taxiTable> <numOfCenters> <numOfIterations>
+    
+    spark-submit --class com.hadooparchitecturebook.taxi360.etl.machinelearning.kudu.MlLibOnKudu --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar c KUDU_MASTER ny_taxi_trip 3 3
+
 
 Testing
 -------

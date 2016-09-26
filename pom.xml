@@ -5,14 +5,14 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.hadooparchitecturebook</groupId>
-    <artifactId>apptrans</artifactId>
+    <artifactId>taxi360</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
         <spark.version>1.6.0-cdh5.8.1</spark.version>
         <scala.version>2.10.4</scala.version>
         <kafka.version>0.9.0-kafka-2.0.2</kafka.version>
-        <kudu.version>0.10.0</kudu.version>
+        <kudu.version>1.0.0</kudu.version>
         <scala.binary.version>2.10</scala.binary.version>
         <solr.version>4.10.3-cdh5.8.1</solr.version>
         <top.dir>${project.basedir}/..</top.dir>

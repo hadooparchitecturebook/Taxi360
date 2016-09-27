@@ -112,11 +112,11 @@ For example:
 
 **Run HDFS Nested Table Example**
 
-    spark-submit --class com.cloudera.sa.taxi360.sql.kudu.KuduToNestedHDFS --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <runLocal> <KuduMaster> <kuduTaxiTripTableName> <hdfsTaxiNestedTableName>
+    spark-submit --class com.hadooparchitecturebook.taxi360.sql.kudu.KuduToNestedHDFS --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <runLocal> <KuduMaster> <kuduTaxiTripTableName> <hdfsTaxiNestedTableName>
 
 For example:
 
-    spark-submit --class com.cloudera.sa.taxi360.sql.kudu.KuduToNestedHDFS --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar l KUDU_MASTER ny_taxi_trip ny_taxi_nested
+    spark-submit --class com.hadooparchitecturebook.taxi360.sql.kudu.KuduToNestedHDFS --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar l KUDU_MASTER ny_taxi_trip ny_taxi_nested
 
 Testing
 -------
@@ -135,7 +135,7 @@ From the impala-shell or Hue Impala Query Editor:
 
 On the gateway node, start the REST server in a terminal:
 
-    java -cp Taxi360.jar com.cloudera.sa.taxi360.server.kudu.KuduRestServer 4242 KUDU_MASTER ny_taxi_trip ny_taxi_entity
+    java -cp Taxi360.jar com.hadooparchitecturebook.taxi360.server.kudu.KuduRestServer 4242 KUDU_MASTER ny_taxi_trip ny_taxi_entity
 
 In another terminal, run some test requests:
 

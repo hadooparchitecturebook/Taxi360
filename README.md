@@ -116,7 +116,7 @@ For example:
 
 For example:
 
-    spark-submit --class com.cloudera.sa.taxi360.sql.kudu.KuduToNestedHDFS \ --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar l KUDU_MASTER ny_taxi_trip ny_taxi_nested
+    spark-submit --class com.cloudera.sa.taxi360.sql.kudu.KuduToNestedHDFS --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar l KUDU_MASTER ny_taxi_trip ny_taxi_nested
 
 Testing
 -------

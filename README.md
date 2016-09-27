@@ -98,14 +98,25 @@ For example:
 
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.hbase.SparkStreamingTaxiTripToHBase --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <KafkaBrokerList> <kafkaTopicList> <numberOfSeconds> <runLocal> <hbaseTable> <numOfSalts> <checkpointDir> <hbaseConfigFolder>
 
+For example:
+
     spark-submit --class com.hadooparchitecturebook.taxi360.streaming.ingestion.hbase.SparkStreamingTaxiTripToHBase --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar KAFKA_BROKER_1:9092,KAFKA_BROKER_2:9092 taxi-trip-input 1 c taxi-trip 6 /tmp/checkpoint /opt/cloudera/parcels/CDH/lib/hbase/conf/
 
 **Run Spark SQL and MlLib Example**
 
     spark-submit --class com.hadooparchitecturebook.taxi360.etl.machinelearning.kudu.MlLibOnKudu --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <runLocal> <kuduMaster> <taxiTable> <numOfCenters> <numOfIterations>
-    
+
+For example:
+
     spark-submit --class com.hadooparchitecturebook.taxi360.etl.machinelearning.kudu.MlLibOnKudu --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar c KUDU_MASTER ny_taxi_trip 3 3
 
+**Run HDFS Nested Table Example**
+
+    spark-submit --class com.cloudera.sa.taxi360.sql.kudu.KuduToNestedHDFS --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar <runLocal> <KuduMaster> <kuduTaxiTripTableName> <hdfsTaxiNestedTableName>
+
+For example:
+
+    spark-submit --class com.cloudera.sa.taxi360.sql.kudu.KuduToNestedHDFS \ --master yarn --deploy-mode client --executor-memory 512MB --num-executors 2 --executor-cores 1 Taxi360.jar l KUDU_MASTER ny_taxi_trip ny_taxi_nested
 
 Testing
 -------
@@ -120,6 +131,17 @@ From the impala-shell or Hue Impala Query Editor:
 
     select * from ny_taxi_trip
 
+**Kudu REST Server:**
+
+On the gateway node, start the REST server in a terminal:
+
+    java -cp Taxi360.jar com.cloudera.sa.taxi360.server.kudu.KuduRestServer 4242 KUDU_MASTER ny_taxi_trip ny_taxi_entity
+
+In another terminal, run some test requests:
+
+    curl http://localhost:4242/rest/hello
+
+    curl http://localhost:4242/rest/vender/14VTS
 **HBase:**
 
 In the HBase shell, run the following command:
